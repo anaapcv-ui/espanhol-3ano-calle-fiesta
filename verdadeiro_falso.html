@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✅ ¿Verdad o Mentira?</title>
+<style>
+  :root{--rosa:#ff6fae;--sol:#ffd23f;--cielo:#4aa3df;--menta:#43c6ac;--tinta:#3a2b4d;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Comic Sans MS','Trebuchet MS',system-ui,sans-serif;
+    background:linear-gradient(160deg,#fff7fb 0%,#fdf0f7 50%,#eefbf7 100%);
+    color:var(--tinta);padding:16px;font-size:18px;line-height:1.5;}
+  .wrap{max-width:720px;margin:0 auto;}
+  .hero{text-align:center;background:linear-gradient(135deg,var(--menta),var(--cielo));
+    border-radius:24px;padding:20px;color:#fff;box-shadow:0 8px 0 #2f7fb8;margin-bottom:16px;}
+  .hero h1{margin:.1em 0;font-size:1.8em;text-shadow:2px 2px 0 rgba(0,0,0,.15);}
+  .placar{display:flex;justify-content:space-around;font-size:1.1em;font-weight:bold;margin:10px 0;}
+  .card{background:#fff;border-radius:22px;padding:24px 18px;box-shadow:0 6px 0 rgba(0,0,0,.1);
+    border:4px solid var(--sol);text-align:center;margin:16px 0;}
+  .frase{font-size:1.45em;font-weight:bold;margin:14px 0 22px;min-height:70px;}
+  .botoes{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .bt{border:none;border-radius:18px;padding:16px 28px;font-size:1.25em;font-weight:bold;
+    cursor:pointer;font-family:inherit;color:#fff;}
+  .bt-v{background:var(--menta);box-shadow:0 5px 0 #2f9c86;}
+  .bt-f{background:var(--rosa);box-shadow:0 5px 0 #e0559a;}
+  .bt:active{transform:translateY(3px);}
+  .bt:disabled{opacity:.5;cursor:default;}
+  .fb{margin-top:18px;font-size:1.05em;padding:12px;border-radius:14px;display:none;}
+  .fb.ok{background:#d6f5e3;color:#1c7a45;}
+  .fb.no{background:#ffe0e0;color:#b33;}
+  .bt-prox{background:var(--cielo);color:#fff;border:none;border-radius:16px;padding:12px 22px;
+    font-size:1.1em;font-weight:bold;cursor:pointer;box-shadow:0 5px 0 #2f7fb8;font-family:inherit;margin-top:16px;display:none;}
+  .bt-grande{background:var(--menta);color:#fff;border:none;border-radius:18px;padding:16px 26px;
+    font-size:1.2em;font-weight:bold;cursor:pointer;box-shadow:0 6px 0 #2f9c86;font-family:inherit;
+    text-decoration:none;display:inline-block;margin:8px;}
+  #final{display:none;text-align:center;}
+  .trofeu{font-size:4em;}
+  a.volta{display:inline-block;margin-top:10px;color:var(--cielo);font-weight:bold;}
+  #trava{position:fixed;inset:0;background:rgba(58,43,77,.96);color:#fff;z-index:99;
+    display:none;align-items:center;justify-content:center;text-align:center;padding:24px;}
+  #trava .box{max-width:420px;}
+</style>
+</head>
+<body>
+<div id="trava"><div class="box">
+  <div style="font-size:3em;">🔒</div>
+  <h2>Esta etapa ainda está trancada</h2>
+  <p>Para jogar <b>¿Verdad o Mentira?</b>, leia antes <b>La Vitrina</b> (resumo) até o fim.</p>
+  <a class="bt-grande" href="index.html">🏠 Voltar ao início</a>
+</div></div>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>✅ ¿Verdad o Mentira? 🐶</h1>
+    <p>Verdadeiro ou falso? Responda 12 frases!</p>
+  </div>
+
+  <div class="placar">
+    <span id="pProg">Frase 1 de 12</span>
+    <span id="pEstrelas">⭐ 0</span>
+  </div>
+
+  <div class="card" id="jogo">
+    <div class="frase" id="frase">...</div>
+    <div class="botoes">
+      <button class="bt bt-v" id="btV">✅ Verdad</button>
+      <button class="bt bt-f" id="btF">❌ Mentira</button>
+    </div>
+    <div class="fb" id="fb"></div>
+    <button class="bt-prox" id="btProx">Próxima →</button>
+  </div>
+
+  <div class="card" id="final">
+    <div class="trofeu" id="trofeu">🏆</div>
+    <h2 id="fTitulo">¡Muy bien!</h2>
+    <p id="fNota" style="font-size:1.3em;font-weight:bold;"></p>
+    <p id="fMsg"></p>
+    <button class="bt-grande" id="btDeNovo" style="background:var(--sol);box-shadow:0 6px 0 #d9ad1f;">🔁 Jogar de novo</button>
+    <a class="bt-grande" href="simulado.html">🎯 Ir para La Gran Fiesta (simulado) →</a>
+  </div>
+
+  <div style="text-align:center;"><a class="volta" href="index.html">🏠 Voltar ao início</a></div>
+</div>
+
+<script>
+var KIT='cf3';
+function load(k){try{var v=localStorage.getItem(KIT+'_'+k);return v?JSON.parse(v):{};}catch(e){return (window.__mem&&window.__mem[k])||{};}}
+function save(k,o){try{localStorage.setItem(KIT+'_'+k,JSON.stringify(o));}catch(e){window.__mem=window.__mem||{};window.__mem[k]=o;}}
+function concl(k){return !!load(k).concluido;}
+function trilhaLib(){return !!load('trilha').liberadoPelosPais;}
+
+if(!(concl('resumo')||trilhaLib()||concl('vf'))){
+  document.getElementById('trava').style.display='flex';
+}
+
+var BANCO=[
+  {f:'"El pastel" é o bolo da festa.',v:true,e:'Sim! "El pastel" = o bolo.'},
+  {f:'"Los globos" são os presentes.',v:false,e:'Não! "Los globos" são os balões. Presentes = "los regalos".'},
+  {f:'"La piñata" é um enfeite de festa cheio de doces.',v:true,e:'Isso! Batemos na piñata para cair os dulces.'},
+  {f:'"Los regalos" são os presentes.',v:true,e:'Correto! "Los regalos" = os presentes.'},
+  {f:'"Los dulces" são os salgadinhos.',v:false,e:'Não! "Los dulces" são os doces. Salgadinhos = "los bocadillos".'},
+  {f:'"Los bocadillos" são os salgadinhos / lanches.',v:true,e:'Sim! "Los bocadillos" = salgadinhos / lanches.'},
+  {f:'"La bruja" é a princesa.',v:false,e:'Não! "La bruja" é a bruxa. Princesa = "la princesa".'},
+  {f:'"El pirata" é o pirata.',v:true,e:'Correto! "El pirata" = o pirata.'},
+  {f:'"El hada" é palavra feminina, mas usa o artigo "el" no singular.',v:true,e:'Isso mesmo! É a pegadinha: "el hada" = a fada (feminina).'},
+  {f:'"La princesa" quer dizer o príncipe.',v:false,e:'Não! "La princesa" = a princesa. O príncipe = "el príncipe".'},
+  {f:'"La panadería" é a padaria.',v:true,e:'Sim! Na panadería compramos pão.'},
+  {f:'"La heladería" vende remédios.',v:false,e:'Não! "La heladería" é a sorveteria. Remédios = na "farmacia".'},
+  {f:'"La farmacia" é a farmácia.',v:true,e:'Correto! "La farmacia" = a farmácia.'},
+  {f:'"El supermercado" é o supermercado.',v:true,e:'Sim! Palavra bem parecida com o português.'},
+  {f:'"La plaza" é a praça.',v:true,e:'Isso! "La plaza" = a praça.'},
+  {f:'"El quiosco" quer dizer a escola.',v:false,e:'Não! "El quiosco" é a banca/quiosque. Escola = "la escuela".'},
+  {f:'"La escuela" é a escola.',v:true,e:'Correto! "La escuela" = a escola.'},
+  {f:'"El centro comercial" é o shopping.',v:true,e:'Sim! "El centro comercial" = o shopping.'},
+  {f:'"Cerca" significa longe.',v:false,e:'Não! "Cerca" = perto. Longe = "lejos".'},
+  {f:'"Lejos" significa longe.',v:true,e:'Correto! "Lejos" = longe.'},
+  {f:'No diálogo, o supermercado está perto da casa da menina.',v:true,e:'Sim! "muy cerca hay un supermercado y una panadería".'},
+  {f:'No diálogo, o hospital está perto da casa da menina.',v:false,e:'Não! "El hospital y la escuela están un poco lejos" (um pouco longe).'},
+  {f:'"¿Dónde?" pergunta "para onde?".',v:false,e:'Não! "¿Dónde?" = onde. "Para onde?" = "¿Adónde?".'},
+  {f:'"La iglesia" é a igreja.',v:true,e:'Correto! "La iglesia" = a igreja.'}
+];
+
+function embaralha(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+var rodada,idx,acertos;
+function novaRodada(){
+  rodada=embaralha(BANCO).slice(0,12);
+  idx=0;acertos=0;
+  document.getElementById('final').style.display='none';
+  document.getElementById('jogo').style.display='block';
+  mostra();
+}
+function mostra(){
+  var q=rodada[idx];
+  document.getElementById('frase').textContent=q.f;
+  document.getElementById('pProg').textContent='Frase '+(idx+1)+' de 12';
+  document.getElementById('pEstrelas').textContent='⭐ '+acertos;
+  document.getElementById('fb').style.display='none';
+  document.getElementById('btProx').style.display='none';
+  document.getElementById('btV').disabled=false;
+  document.getElementById('btF').disabled=false;
+}
+function responde(resp){
+  var q=rodada[idx];
+  document.getElementById('btV').disabled=true;
+  document.getElementById('btF').disabled=true;
+  var fb=document.getElementById('fb');
+  if(resp===q.v){acertos++;fb.className='fb ok';fb.innerHTML='✅ ¡Correcto! '+q.e;}
+  else{fb.className='fb no';fb.innerHTML='💡 Era <b>'+(q.v?'Verdad':'Mentira')+'</b>. '+q.e;}
+  fb.style.display='block';
+  document.getElementById('pEstrelas').textContent='⭐ '+acertos;
+  document.getElementById('btProx').style.display='inline-block';
+  document.getElementById('btProx').textContent=(idx<11?'Próxima →':'Ver resultado 🏆');
+}
+document.getElementById('btV').addEventListener('click',function(){responde(true);});
+document.getElementById('btF').addEventListener('click',function(){responde(false);});
+document.getElementById('btProx').addEventListener('click',function(){
+  if(idx<11){idx++;mostra();}else{fim();}
+});
+function fim(){
+  document.getElementById('jogo').style.display='none';
+  var fin=document.getElementById('final');fin.style.display='block';
+  var pct=Math.round(acertos/12*100);
+  document.getElementById('fNota').textContent='Você acertou '+acertos+' de 12 ('+pct+'%)';
+  var tro,tit,msg;
+  if(pct>=84){tro='🏆';tit='¡Excelente!';msg='Você mandou muito bem! 🌟🌟🌟';}
+  else if(pct>=50){tro='🥈';tit='¡Muy bien!';msg='Está indo bem! Revise o resumo e jogue de novo. 🌟🌟';}
+  else{tro='🌱';tit='¡Casi!';msg='Vamos aprender juntos! Volte ao resumo e tente outra vez. 🌟';}
+  document.getElementById('trofeu').textContent=tro;
+  document.getElementById('fTitulo').textContent=tit;
+  document.getElementById('fMsg').textContent=msg;
+  var e=load('vf');
+  if(!e.concluido){e.concluido=true;e.concluidoEm=new Date().toISOString();}
+  e.rodadas=(e.rodadas||0)+1;
+  if(acertos>(e.melhor||0))e.melhor=acertos;
+  save('vf',e);
+}
+document.getElementById('btDeNovo').addEventListener('click',novaRodada);
+novaRodada();
+</script>
+</body>
+</html>
