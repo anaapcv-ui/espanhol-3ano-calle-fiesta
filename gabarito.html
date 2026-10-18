@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📘 Gabarito comentado — La Gran Fiesta</title>
+<style>
+  :root{--rosa:#ff6fae;--sol:#ffd23f;--cielo:#4aa3df;--menta:#43c6ac;--tinta:#3a2b4d;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Comic Sans MS','Trebuchet MS',system-ui,sans-serif;
+    background:linear-gradient(160deg,#fff7fb 0%,#fdf0f7 50%,#eefbf7 100%);
+    color:var(--tinta);padding:16px;font-size:17px;line-height:1.5;}
+  .wrap{max-width:760px;margin:0 auto;}
+  .hero{text-align:center;background:linear-gradient(135deg,var(--sol),var(--menta));
+    border-radius:24px;padding:18px;color:#fff;box-shadow:0 8px 0 #2f9c86;margin-bottom:14px;}
+  .hero h1{margin:.1em 0;font-size:1.6em;}
+  .nota-pais{background:#fff;border-radius:14px;padding:12px 14px;margin:12px 0;border-left:6px solid var(--cielo);font-size:.95em;}
+  .tabela{background:#fff;border-radius:16px;padding:12px;margin:12px 0;box-shadow:0 4px 0 rgba(0,0,0,.08);}
+  .tabela h2{margin:.2em 0;font-size:1.2em;}
+  .grade{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{background:#eef7ff;border-radius:10px;padding:5px 9px;font-weight:bold;font-size:.92em;}
+  .chip b{color:#c23a7e;}
+  .q{background:#fff;border-radius:16px;padding:14px 16px;margin:12px 0;box-shadow:0 4px 0 rgba(0,0,0,.08);}
+  .q .enun{font-weight:bold;margin-bottom:10px;}
+  .op{border-radius:12px;padding:9px 12px;margin:6px 0;}
+  .op .letra{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:50%;margin-right:8px;font-weight:bold;color:#fff;}
+  .op.certa{background:#d6f5e3;border:2px solid #37b56e;}
+  .op.certa .letra{background:#37b56e;}
+  .op.errada{background:#f2f2f2;color:#888;}
+  .op.errada .letra{background:#bbb;}
+  .exp{background:#eef7ff;border-radius:10px;padding:8px 12px;margin-top:8px;font-size:.95em;}
+  .dica{background:#fff6d6;border-radius:10px;padding:8px 12px;margin-top:8px;font-size:.95em;border-left:5px solid var(--sol);}
+  a.volta{display:inline-block;margin:14px 6px;color:#fff;background:var(--cielo);padding:12px 20px;border-radius:14px;text-decoration:none;font-weight:bold;box-shadow:0 5px 0 #2f7fb8;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>📘 Gabarito comentado</h1>
+    <p>La Gran Fiesta — Espanhol 3º ano</p>
+  </div>
+
+  <div class="nota-pais">👨‍👩‍👧 <b>Para os pais:</b> a resposta certa está em <b style="color:#1c7a45;">verde</b>.
+  As erradas estão em cinza com a explicação. Use para corrigir junto com a criança.</div>
+
+  <div class="tabela">
+    <h2>✅ Respostas rápidas</h2>
+    <div class="grade" id="grade"></div>
+  </div>
+
+  <div id="lista"></div>
+
+  <div style="text-align:center;">
+    <a class="volta" href="simulado.html">🎯 Voltar ao simulado</a>
+    <a class="volta" href="index.html" style="background:var(--menta);box-shadow:0 5px 0 #2f9c86;">🏠 Início</a>
+  </div>
+</div>
+
+<script>
+/* MESMO banco e MESMA semente do simulado, + explicação e dica */
+var QS=[
+ {q:'Como se diz "o bolo" em espanhol?',a:'el pastel',opts:['el pastel','los globos','la piñata','los regalos'],exp:'"El pastel" é o bolo. "Los globos" são balões, "la piñata" é o enfeite de doces e "los regalos" são presentes.',dica:'pastel = bolo 🍰'},
+ {q:'Como se diz "os doces" em espanhol?',a:'los dulces',opts:['los dulces','los bocadillos','los regalos','los globos'],exp:'"Los dulces" são os doces. "Los bocadillos" são salgadinhos; os outros são presentes e balões.',dica:'dulces = doces 🍬'},
+ {q:'"Os salgadinhos / lanches" em espanhol são...',a:'los bocadillos',opts:['los bocadillos','los dulces','el pastel','la piñata'],exp:'"Los bocadillos" são os salgadinhos/lanches. "Los dulces" são doces.',dica:'bocadillos = salgadinhos 🥪'},
+ {q:'Como se diz "os balões / bexigas"?',a:'los globos',opts:['los globos','los regalos','los dulces','el pastel'],exp:'"Los globos" são os balões. "Los regalos" são presentes.',dica:'globos = balões 🎈'},
+ {q:'Como se diz "os presentes"?',a:'los regalos',opts:['los regalos','los globos','los dulces','los bocadillos'],exp:'"Los regalos" são os presentes. Não confundir com "los globos" (balões).',dica:'regalos = presentes 🎁'},
+ {q:'Que coisa de festa batemos para cair os doces?',a:'la piñata',opts:['la piñata','el pastel','la tienda','la plaza'],exp:'"La piñata" é o enfeite cheio de doces. "El pastel" é o bolo; os outros são lugares da cidade.',dica:'piñata = pinhata 🪅'},
+ {q:'Como se diz "a princesa"?',a:'la princesa',opts:['la princesa','la bruja','el hada','el príncipe'],exp:'"La princesa" é a princesa. "La bruja" é a bruxa, "el hada" é a fada e "el príncipe" é o príncipe.',dica:'princesa = princesa 👸'},
+ {q:'Como se diz "o pirata"?',a:'el pirata',opts:['el pirata','el príncipe','la bruja','el hada'],exp:'"El pirata" é o pirata. As outras são personagens diferentes.',dica:'pirata = pirata 🏴‍☠️'},
+ {q:'Como se diz "a fada"?',a:'el hada',opts:['el hada','la bruja','la princesa','el príncipe'],exp:'"El hada" é a fada. É feminina, mas usa o artigo "el" no singular — pegadinha!',dica:'el hada = a fada 🧚'},
+ {q:'Como se diz "a bruxa"?',a:'la bruja',opts:['la bruja','la princesa','el hada','el pirata'],exp:'"La bruja" é a bruxa. "La princesa" é a princesa e "el hada" é a fada.',dica:'bruja = bruxa 🧙'},
+ {q:'A palavra "el hada" (a fada) é...',a:'feminina, mas usa o artigo "el" no singular',opts:['feminina, mas usa o artigo "el" no singular','masculina','sempre no plural','só usada na festa'],exp:'"El hada" é feminina (a fada), mas no singular leva o artigo "el". É uma regra especial do espanhol.',dica:'el hada é feminina! ⭐'},
+ {q:'Para comprar pão, vou à...',a:'la panadería',opts:['la panadería','la heladería','la farmacia','la escuela'],exp:'"La panadería" é a padaria (pão). "La heladería" é sorveteria, "la farmacia" é farmácia e "la escuela" é escola.',dica:'panadería = padaria 🥖'},
+ {q:'Para tomar sorvete, vou à...',a:'la heladería',opts:['la heladería','la panadería','la farmacia','el hospital'],exp:'"La heladería" é a sorveteria (helado = sorvete). As outras são padaria, farmácia e hospital.',dica:'heladería = sorveteria 🍦'},
+ {q:'Para comprar remédio, vou à...',a:'la farmacia',opts:['la farmacia','la panadería','la heladería','la tienda'],exp:'"La farmacia" é a farmácia (remédios). "La tienda" é uma loja qualquer.',dica:'farmacia = farmácia 💊'},
+ {q:'"El supermercado" em português é...',a:'o supermercado',opts:['o supermercado','o shopping','a padaria','a banca'],exp:'"El supermercado" é o supermercado. O shopping é "el centro comercial".',dica:'supermercado = supermercado 🛒'},
+ {q:'"La plaza" em português é...',a:'a praça',opts:['a praça','a rua','a loja','a igreja'],exp:'"La plaza" é a praça. A rua é "la calle", a loja é "la tienda" e a igreja é "la iglesia".',dica:'plaza = praça 🌳'},
+ {q:'"El centro comercial" em português é...',a:'o shopping',opts:['o shopping','o supermercado','a sorveteria','a padaria'],exp:'"El centro comercial" é o shopping. "El supermercado" é supermercado.',dica:'centro comercial = shopping 🏬'},
+ {q:'"El quiosco" em português é...',a:'a banca / quiosque',opts:['a banca / quiosque','a escola','a igreja','a praça'],exp:'"El quiosco" é a banca/quiosque. "La escuela" é escola, "la iglesia" é igreja, "la plaza" é praça.',dica:'quiosco = banca 🗞️'},
+ {q:'"La escuela" em português é...',a:'a escola',opts:['a escola','o hospital','a loja','a rua'],exp:'"La escuela" é a escola. "El hospital" é hospital, "la tienda" é loja, "la calle" é rua.',dica:'escuela = escola 🏫'},
+ {q:'"Cerca" significa...',a:'perto',opts:['perto','longe','grande','rápido'],exp:'"Cerca" quer dizer perto. O contrário é "lejos" (longe).',dica:'cerca = perto 📍'},
+ {q:'"Lejos" significa...',a:'longe',opts:['longe','perto','pequeno','devagar'],exp:'"Lejos" quer dizer longe. O contrário é "cerca" (perto).',dica:'lejos = longe 🚶‍♂️'},
+ {q:'Qual palavra pergunta "PARA ONDE você vai"?',a:'¿Adónde?',opts:['¿Adónde?','¿Dónde?','¿Qué?','¿Cuándo?'],exp:'"¿Adónde?" pergunta PARA ONDE (movimento). "¿Dónde?" pergunta ONDE (lugar). "¿Qué?" é o quê e "¿Cuándo?" é quando.',dica:'¿Adónde? = para onde 🧭'},
+ {q:'Complete: "Andrea trabaja en un ______." (Andrea trabalha em um...)',a:'hospital',opts:['hospital','pastel','globo','pirata'],exp:'A frase certa é "Andrea trabaja en un HOSPITAL". As outras palavras não são lugares de trabalho.',dica:'trabajar = trabalhar 🏥'},
+ {q:'Ordene as letras OBSGOL. Qual palavra é?',a:'globos',opts:['globos','regalos','dulces','pastel'],exp:'As letras O-B-S-G-O-L formam "globos" (balões).',dica:'OBSGOL → globos 🎈'},
+ {q:'Ordene as letras PELSAT. Qual palavra é?',a:'pastel',opts:['pastel','dulces','piñata','hada'],exp:'As letras P-E-L-S-A-T formam "pastel" (bolo).',dica:'PELSAT → pastel 🍰'}
+];
+
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function embaralhaSemente(arr,seed){var a=arr.slice();var rnd=mulberry32(seed);for(var i=a.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+var letras=['A','B','C','D'];
+var gradeHTML='',listaHTML='';
+QS.forEach(function(Q,idx){
+  var ordem=embaralhaSemente(Q.opts,777+idx*31);
+  var ci=ordem.indexOf(Q.a);
+  gradeHTML+='<span class="chip">'+(idx+1)+'. <b>'+letras[ci]+'</b></span>';
+  var h='<div class="q"><div class="enun">'+(idx+1)+') '+Q.q+'</div>';
+  ordem.forEach(function(o,j){
+    var cls=(j===ci)?'op certa':'op errada';
+    h+='<div class="'+cls+'"><span class="letra">'+letras[j]+'</span>'+o+(j===ci?' ✅':'')+'</div>';
+  });
+  h+='<div class="exp">📖 '+Q.exp+'</div>';
+  h+='<div class="dica">💡 Dica: '+Q.dica+'</div>';
+  h+='</div>';
+  listaHTML+=h;
+});
+document.getElementById('grade').innerHTML=gradeHTML;
+document.getElementById('lista').innerHTML=listaHTML;
+</script>
+</body>
+</html>
