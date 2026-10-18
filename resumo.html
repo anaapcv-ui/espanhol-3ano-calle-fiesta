@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗺️ La Vitrina — Resumo</title>
+<style>
+  :root{--rosa:#ff6fae;--sol:#ffd23f;--cielo:#4aa3df;--menta:#43c6ac;--tinta:#3a2b4d;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Comic Sans MS','Trebuchet MS',system-ui,sans-serif;
+    background:linear-gradient(160deg,#fff7fb 0%,#fdf0f7 50%,#eefbf7 100%);
+    color:var(--tinta);padding:16px;font-size:18px;line-height:1.5;}
+  .wrap{max-width:860px;margin:0 auto;}
+  .hero{text-align:center;background:linear-gradient(135deg,var(--sol),var(--rosa));
+    border-radius:24px;padding:20px;color:#fff;box-shadow:0 8px 0 #e0559a;margin-bottom:16px;}
+  .hero h1{margin:.1em 0;font-size:1.8em;text-shadow:2px 2px 0 rgba(0,0,0,.15);}
+  .quadro{background:#fff;border-radius:20px;margin:16px 0;padding:16px;
+    box-shadow:0 5px 0 rgba(0,0,0,.1);border:4px solid;}
+  .quadro.q1{border-color:var(--rosa);}
+  .quadro.q2{border-color:var(--sol);}
+  .quadro.q3{border-color:var(--cielo);}
+  .quadro.q4{border-color:var(--menta);}
+  .quadro h2{margin-top:0;font-size:1.3em;}
+  .palabra{display:flex;align-items:center;gap:10px;background:#fafafa;border-radius:12px;
+    padding:8px 10px;margin:6px 0;flex-wrap:wrap;}
+  .palabra .es{font-weight:bold;color:#c23a7e;font-size:1.1em;}
+  .palabra .pt{color:#555;}
+  .bt-audio{background:var(--sol);border:none;border-radius:50%;width:40px;height:40px;
+    font-size:1.15em;cursor:pointer;box-shadow:0 3px 0 #d9ad1f;flex:0 0 auto;}
+  .bt-audio:active{transform:translateY(2px);box-shadow:0 1px 0 #d9ad1f;}
+  .cancion{background:linear-gradient(135deg,#fff0f7,#fff8e0);border:4px dashed var(--rosa);
+    border-radius:20px;padding:16px;margin:16px 0;text-align:center;}
+  .cancion p{font-size:1.15em;margin:6px 0;color:#b03070;font-weight:bold;}
+  .dica{background:#eef7ff;border-left:6px solid var(--cielo);border-radius:10px;padding:10px 14px;margin:10px 0;}
+  .anag{background:#f6f2ff;border-radius:14px;padding:12px;margin:10px 0;}
+  .anag li{margin:6px 0;}
+  .anag b{color:#7a3ff2;}
+  .fim{text-align:center;margin:28px 0;}
+  .bt-grande{background:var(--menta);color:#fff;border:none;border-radius:18px;padding:16px 26px;
+    font-size:1.2em;font-weight:bold;cursor:pointer;box-shadow:0 6px 0 #2f9c86;font-family:inherit;
+    text-decoration:none;display:inline-block;}
+  .bt-grande:disabled{background:#cfd8d5;box-shadow:0 6px 0 #b4bdb9;cursor:not-allowed;}
+  .dica2{color:#8a7;font-size:.95em;margin-top:8px;}
+  a.volta{display:inline-block;margin-top:10px;color:var(--cielo);font-weight:bold;}
+  #trava{position:fixed;inset:0;background:rgba(58,43,77,.96);color:#fff;z-index:99;
+    display:none;align-items:center;justify-content:center;text-align:center;padding:24px;}
+  #trava .box{max-width:420px;}
+</style>
+</head>
+<body>
+<div id="trava"><div class="box">
+  <div style="font-size:3em;">🔒</div>
+  <h2>Esta etapa ainda está trancada</h2>
+  <p>Para abrir <b>La Vitrina</b> (resumo), termine antes a <b>Leitura/Vocabulário</b> (El Paseo).</p>
+  <a class="bt-grande" href="index.html">🏠 Voltar ao início</a>
+</div></div>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>🗺️ La Vitrina — Resumo da prova 🐶</h1>
+    <p>Tudo o que vai cair, bem organizado. Leia até o fim!</p>
+  </div>
+
+  <div class="quadro q1">
+    <h2>🎂 Vocabulário da festa (cumpleaños)</h2>
+    <div data-palabras="comida"></div>
+    <div data-palabras="cosas"></div>
+  </div>
+
+  <div class="quadro q2">
+    <h2>👑 Personagens / fantasias (disfraces)</h2>
+    <div data-palabras="disfraces"></div>
+    <div class="dica">⭐ <b>Pegadinha:</b> <b>el hada</b> (a fada) leva o artigo <b>el</b>, mas é palavra <b>feminina</b>.</div>
+  </div>
+
+  <div class="quadro q3">
+    <h2>🏬 Estabelecimentos comerciais</h2>
+    <div data-palabras="tiendas"></div>
+    <h2 style="margin-top:14px;">⛪ Outros lugares da cidade</h2>
+    <div data-palabras="lugares"></div>
+  </div>
+
+  <div class="quadro q4">
+    <h2>🧭 Palavras para falar da cidade</h2>
+    <div data-palabras="palabras"></div>
+    <div class="dica">📍 <b>cerca</b> = perto &nbsp;↔&nbsp; <b>lejos</b> = longe</div>
+    <div class="dica">❓ <b>¿Dónde?</b> = Onde (está) &nbsp;|&nbsp; <b>¿Adónde?</b> = Para onde (vai)</div>
+    <div class="dica">🚶 Verbos: <b>ir</b> (ir), <b>pasear</b> (passear), <b>trabajar</b> (trabalhar), <b>hay</b> (há/tem)</div>
+  </div>
+
+  <div class="cancion">
+    <h2>🎉 Canción de cumpleaños (Parabéns em espanhol)</h2>
+    <p>Cumpleaños feliz, te deseamos a ti,</p>
+    <p>cumpleaños feliz, cumpleaños feliz.</p>
+    <p>Cumpleaños feliz, te deseamos a ti,</p>
+    <p>que lo pases muy bien, que lo cumplas feliz.</p>
+    <button class="bt-audio" id="audioCancion" style="width:auto;border-radius:14px;padding:0 16px;height:44px;">🔊 Cantar em espanhol</button>
+  </div>
+
+  <div class="quadro q1">
+    <h2>🔤 Anagramas (ordene as letras)</h2>
+    <p>Treine descobrir a palavra escondida. Clique para ver a resposta:</p>
+    <ul class="anag" id="anagramas"></ul>
+  </div>
+
+  <div class="dica" style="border-color:var(--rosa);background:#fff0f7;">
+    💡 <b>Dicas de ouro para a prova:</b> saber traduzir o vocabulário da festa e das lojas,
+    saber que <b>cerca</b> é perto e <b>lejos</b> é longe, e entender o diálogo da menina
+    (plaza, supermercado e panadería estão PERTO; hospital e escola estão um pouco LONGE).
+  </div>
+
+  <div class="fim">
+    <button class="bt-grande" id="btFim" disabled>✅ Li o resumo até o fim</button>
+    <p class="dica2" id="dicaFim">Role a página até o final para liberar o botão 👇</p>
+    <a class="bt-grande" id="btNext" href="verdadeiro_falso.html" style="display:none;margin-top:12px;">✅ Ir para ¿Verdad o Mentira? →</a>
+    <div><a class="volta" href="index.html">🏠 Voltar ao início</a></div>
+  </div>
+</div>
+
+<script>
+var KIT='cf3';
+function load(k){try{var v=localStorage.getItem(KIT+'_'+k);return v?JSON.parse(v):{};}catch(e){return (window.__mem&&window.__mem[k])||{};}}
+function save(k,o){try{localStorage.setItem(KIT+'_'+k,JSON.stringify(o));}catch(e){window.__mem=window.__mem||{};window.__mem[k]=o;}}
+function concl(k){return !!load(k).concluido;}
+function trilhaLib(){return !!load('trilha').liberadoPelosPais;}
+function speakES(txt){try{if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(txt);u.lang='es-ES';u.rate=1;window.speechSynthesis.speak(u);}catch(e){}}
+
+if(!(concl('vocab')||trilhaLib()||concl('resumo'))){
+  document.getElementById('trava').style.display='flex';
+}
+
+var PALABRAS={
+  comida:[{es:'el pastel',pt:'o bolo'},{es:'los dulces',pt:'os doces'},{es:'los bocadillos',pt:'os salgadinhos / lanches'}],
+  cosas:[{es:'los globos',pt:'os balões / bexigas'},{es:'los regalos',pt:'os presentes'},{es:'la piñata',pt:'a pinhata'}],
+  disfraces:[{es:'la princesa',pt:'a princesa'},{es:'el príncipe',pt:'o príncipe'},{es:'el pirata',pt:'o pirata'},{es:'el hada',pt:'a fada'},{es:'la bruja',pt:'a bruxa'}],
+  tiendas:[{es:'el centro comercial',pt:'o shopping'},{es:'el supermercado',pt:'o supermercado'},{es:'el quiosco',pt:'a banca / quiosque'},{es:'la tienda',pt:'a loja'},{es:'la panadería',pt:'a padaria'},{es:'la heladería',pt:'a sorveteria'},{es:'la farmacia',pt:'a farmácia'},{es:'la plaza',pt:'a praça'}],
+  lugares:[{es:'la escuela',pt:'a escola'},{es:'el hospital',pt:'o hospital'},{es:'la iglesia',pt:'a igreja'},{es:'la calle',pt:'a rua'}],
+  palabras:[{es:'hay',pt:'há / tem'},{es:'cerca',pt:'perto'},{es:'lejos',pt:'longe'},{es:'¿Dónde?',pt:'Onde?'},{es:'¿Adónde?',pt:'Para onde?'},{es:'ir',pt:'ir'},{es:'pasear',pt:'passear'},{es:'trabajar',pt:'trabalhar'}]
+};
+function fichaHTML(lista){var h='';lista.forEach(function(p){
+  h+='<div class="palabra"><button class="bt-audio" data-say="'+p.es.replace(/"/g,'&quot;')+'">🔊</button><span class="es">'+p.es+'</span><span class="pt">= '+p.pt+'</span></div>';});return h;}
+document.querySelectorAll('[data-palabras]').forEach(function(d){d.innerHTML=fichaHTML(PALABRAS[d.getAttribute('data-palabras')]||[]);});
+document.querySelectorAll('.bt-audio[data-say]').forEach(function(b){b.addEventListener('click',function(){speakES(b.getAttribute('data-say'));});});
+document.getElementById('audioCancion').addEventListener('click',function(){
+  speakES('Cumpleaños feliz, te deseamos a ti, cumpleaños feliz, cumpleaños feliz. Cumpleaños feliz, te deseamos a ti, que lo pases muy bien, que lo cumplas feliz.');
+});
+
+/* anagramas */
+var ANAG=[
+  {letras:'UDLCSE',resp:'dulces'},
+  {letras:'PELSAT',resp:'pastel'},
+  {letras:'BCOAIDLLSO',resp:'bocadillos'},
+  {letras:'DAHA',resp:'hada'},
+  {letras:'OLRGEAS',resp:'regalos'},
+  {letras:'OBSGOL',resp:'globos'}
+];
+(function(){var ul=document.getElementById('anagramas');var h='';
+  ANAG.forEach(function(a,k){h+='<li><b>'+a.letras+'</b> → <button class="op-anag" data-k="'+k+'" style="border:2px dashed #7a3ff2;background:#fff;border-radius:10px;padding:4px 12px;cursor:pointer;font-family:inherit;color:#7a3ff2;font-weight:bold;">ver resposta</button> <span id="ar'+k+'"></span></li>';});
+  ul.innerHTML=h;
+  document.querySelectorAll('.op-anag').forEach(function(b){b.addEventListener('click',function(){
+    var k=+b.getAttribute('data-k');document.getElementById('ar'+k).innerHTML='= <b style="color:#c23a7e;">'+ANAG[k].resp+'</b>';b.style.display='none';});});
+})();
+
+/* concluir ao rolar até o fim */
+var estado=load('resumo');
+function marcaFim(){var e=load('resumo');if(!e.concluido){e.concluido=true;e.concluidoEm=new Date().toISOString();}e.maxScroll=100;save('resumo',e);
+  document.getElementById('btNext').style.display='inline-block';
+  document.getElementById('dicaFim').style.display='none';
+  document.getElementById('btFim').textContent='⭐ Resumo concluído ⭐';
+  document.getElementById('btFim').disabled=true;}
+function checkScroll(){
+  var h=document.documentElement;
+  var pct=(h.scrollTop+window.innerHeight)/h.scrollHeight*100;
+  var e=load('resumo');if(!e.maxScroll)e.maxScroll=0;
+  if(pct>e.maxScroll){e.maxScroll=Math.round(pct);save('resumo',e);}
+  if(pct>=90){document.getElementById('btFim').disabled=false;
+    if(document.getElementById('dicaFim').style.display!=='none')
+      document.getElementById('dicaFim').textContent='Agora pode clicar no botão! 👇';}
+}
+window.addEventListener('scroll',checkScroll);
+document.getElementById('btFim').addEventListener('click',function(){if(!this.disabled)marcaFim();});
+if(estado.concluido){marcaFim();}
+setTimeout(checkScroll,300);
+</script>
+</body>
+</html>
