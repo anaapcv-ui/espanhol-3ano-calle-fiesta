@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📖 El Paseo — Vocabulário</title>
+<style>
+  :root{--rosa:#ff6fae;--sol:#ffd23f;--cielo:#4aa3df;--menta:#43c6ac;--tinta:#3a2b4d;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Comic Sans MS','Trebuchet MS',system-ui,sans-serif;
+    background:linear-gradient(160deg,#fff7fb 0%,#fdf0f7 50%,#eefbf7 100%);
+    color:var(--tinta);padding:16px;font-size:18px;line-height:1.5;}
+  .wrap{max-width:860px;margin:0 auto;}
+  .hero{text-align:center;background:linear-gradient(135deg,var(--cielo),var(--menta));
+    border-radius:24px;padding:20px;color:#fff;box-shadow:0 8px 0 #2f9c86;margin-bottom:16px;}
+  .hero h1{margin:.1em 0;font-size:1.8em;text-shadow:2px 2px 0 rgba(0,0,0,.15);}
+  .barra{background:#eee;border-radius:20px;height:26px;overflow:hidden;margin:14px 0;}
+  .barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sol),var(--rosa));
+    transition:width .4s;border-radius:20px;}
+  .estrelas{text-align:center;font-size:1.3em;margin:6px 0;}
+  .bloco{background:#fff;border-radius:20px;margin:16px 0;padding:16px;
+    box-shadow:0 5px 0 rgba(0,0,0,.1);border:4px solid;}
+  .bloco.b1{border-color:var(--rosa);}
+  .bloco.b2{border-color:var(--sol);}
+  .bloco.b3{border-color:var(--cielo);}
+  .bloco.b4{border-color:var(--menta);}
+  .bloco h2{margin-top:0;font-size:1.35em;}
+  .bloqueado{opacity:.45;}
+  .bloqueado .conteudo-bloco{display:none;}
+  .cadeado-bloco{text-align:center;font-size:1.1em;color:#999;padding:14px;}
+  .palabra{display:flex;align-items:center;gap:10px;background:#fafafa;border-radius:12px;
+    padding:8px 10px;margin:7px 0;flex-wrap:wrap;}
+  .palabra .es{font-weight:bold;color:#c23a7e;font-size:1.12em;}
+  .palabra .pt{color:#555;}
+  .bt-audio{background:var(--sol);border:none;border-radius:50%;width:42px;height:42px;
+    font-size:1.2em;cursor:pointer;box-shadow:0 3px 0 #d9ad1f;flex:0 0 auto;}
+  .bt-audio:active{transform:translateY(2px);box-shadow:0 1px 0 #d9ad1f;}
+  .nota{background:#fff6d6;border-left:6px solid var(--sol);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:.98em;}
+  .dialogo{background:#eef7ff;border-radius:14px;padding:12px 14px;margin:12px 0;}
+  .dialogo p{margin:8px 0;}
+  .dialogo .n{color:var(--rosa);font-weight:bold;}
+  .preg{background:#f6f2ff;border-radius:14px;padding:12px;margin:12px 0;}
+  .preg .q{font-weight:bold;margin-bottom:8px;}
+  .op{display:block;width:100%;text-align:left;background:#fff;border:2px solid #ddd;
+    border-radius:12px;padding:11px 13px;margin:7px 0;font-size:1em;cursor:pointer;
+    font-family:inherit;color:var(--tinta);}
+  .op:hover{border-color:var(--cielo);}
+  .op.certo{background:#d6f5e3;border-color:#37b56e;font-weight:bold;}
+  .op.errado{background:#ffe0e0;border-color:#e36;}
+  .op:disabled{cursor:default;}
+  .fb{margin-top:8px;font-size:.96em;padding:8px 10px;border-radius:10px;display:none;}
+  .fb.ok{background:#d6f5e3;color:#1c7a45;}
+  .fb.no{background:#fff0d6;color:#9a6a00;}
+  .fim{text-align:center;margin:24px 0;}
+  .bt-grande{background:var(--menta);color:#fff;border:none;border-radius:18px;padding:16px 26px;
+    font-size:1.2em;font-weight:bold;cursor:pointer;box-shadow:0 6px 0 #2f9c86;font-family:inherit;
+    text-decoration:none;display:inline-block;}
+  .bt-grande:disabled{background:#cfd8d5;box-shadow:0 6px 0 #b4bdb9;cursor:not-allowed;}
+  a.volta{display:inline-block;margin-top:10px;color:var(--cielo);font-weight:bold;}
+  /* trava */
+  #trava{position:fixed;inset:0;background:rgba(58,43,77,.96);color:#fff;z-index:99;
+    display:none;align-items:center;justify-content:center;text-align:center;padding:24px;}
+  #trava .box{max-width:420px;}
+  #trava h2{font-size:1.6em;}
+</style>
+</head>
+<body>
+<div id="trava"><div class="box">
+  <div style="font-size:3em;">🔒</div>
+  <h2>Esta etapa ainda está trancada</h2>
+  <p id="travaMsg">Para abrir <b>El Paseo</b>, primeiro explore o <b>Mapa da Calle Fiesta</b>.</p>
+  <a class="bt-grande" href="index.html">🏠 Voltar ao início</a>
+</div></div>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>📖 El Paseo — Vocabulário 🐶</h1>
+    <p>Leia, ouça 🔊 e responda. Cada bloco abre o próximo!</p>
+  </div>
+
+  <div class="barra"><i id="barra"></i></div>
+  <div class="estrelas" id="estrelas">⭐ 0 de 12 perguntas</div>
+
+  <!-- BLOCO 1 -->
+  <div class="bloco b1" id="bloco0">
+    <h2>🎂 Bloco 1 — La fiesta de cumpleaños</h2>
+    <div class="conteudo-bloco">
+      <p>Numa <b>fiesta de cumpleaños</b> (festa de aniversário) tem muita coisa gostosa e divertida:</p>
+      <div data-palabras="comida"></div>
+      <div data-palabras="cosas"></div>
+      <div class="preguntas" data-bloco="0"></div>
+    </div>
+  </div>
+
+  <!-- BLOCO 2 -->
+  <div class="bloco b2 bloqueado" id="bloco1">
+    <h2>👑 Bloco 2 — Los personajes (disfraces)</h2>
+    <div class="cadeado-bloco">🔒 Responda as 3 perguntas do Bloco 1 para abrir.</div>
+    <div class="conteudo-bloco">
+      <p>Na festa, as crianças usam <b>disfraces</b> (fantasias):</p>
+      <div data-palabras="disfraces"></div>
+      <div class="nota">⭐ <b>Atenção:</b> <b>el hada</b> (a fada) leva o artigo <b>el</b> no singular, mas é uma palavra <b>feminina</b>. É uma pegadinha do espanhol!</div>
+      <div class="preguntas" data-bloco="1"></div>
+    </div>
+  </div>
+
+  <!-- BLOCO 3 -->
+  <div class="bloco b3 bloqueado" id="bloco2">
+    <h2>🏬 Bloco 3 — Un recorrido por la ciudad</h2>
+    <div class="cadeado-bloco">🔒 Responda as 3 perguntas do Bloco 2 para abrir.</div>
+    <div class="conteudo-bloco">
+      <p>Na cidade há muitos <b>establecimientos comerciales</b> (lojas e comércios) e outros lugares:</p>
+      <div data-palabras="tiendas"></div>
+      <p><b>Otros lugares de la ciudad:</b></p>
+      <div data-palabras="lugares"></div>
+      <div class="preguntas" data-bloco="2"></div>
+    </div>
+  </div>
+
+  <!-- BLOCO 4 -->
+  <div class="bloco b4 bloqueado" id="bloco3">
+    <h2>🧭 Bloco 4 — Moverse por la ciudad + diálogo</h2>
+    <div class="cadeado-bloco">🔒 Responda as 3 perguntas do Bloco 3 para abrir.</div>
+    <div class="conteudo-bloco">
+      <p>Para falar da cidade usamos estas palavrinhas:</p>
+      <div data-palabras="palabras"></div>
+      <div class="dialogo">
+        <p><b>📣 Diálogo do livro — a menina conta como é a cidade onde vive:</b></p>
+        <p><span class="n">—</span> ¡Hola, Maite! ¿Qué tal todo? ¡Me encanta mi nueva ciudad! Es muy hermosa y tranquila. Aquí hay de todo. Cerca de mi casa hay una plaza muy linda y muy cerca hay un supermercado y una panadería. El hospital y la escuela están un poco lejos.</p>
+        <p><span class="n">—</span> ¡Genial! ¿Cuándo puedo visitarte?</p>
+        <p style="font-size:.95em;color:#567;">👉 Perto da casa dela: a <b>plaza</b>, o <b>supermercado</b> e a <b>panadería</b>. Um pouco longe: o <b>hospital</b> e a <b>escuela</b>.</p>
+        <button class="bt-audio" id="audioDialogo" style="width:auto;border-radius:14px;padding:0 16px;">🔊 Ouvir o diálogo</button>
+      </div>
+      <div class="preguntas" data-bloco="3"></div>
+    </div>
+  </div>
+
+  <div class="fim">
+    <p id="msgFim" style="font-size:1.15em;font-weight:bold;"></p>
+    <a class="bt-grande" id="btNext" href="resumo.html" style="display:none;">🗺️ Ir para La Vitrina (resumo) →</a>
+    <div><a class="volta" href="index.html">🏠 Voltar ao início</a></div>
+  </div>
+</div>
+
+<script>
+var KIT='cf3';
+function load(k){try{var v=localStorage.getItem(KIT+'_'+k);return v?JSON.parse(v):{};}catch(e){return (window.__mem&&window.__mem[k])||{};}}
+function save(k,o){try{localStorage.setItem(KIT+'_'+k,JSON.stringify(o));}catch(e){window.__mem=window.__mem||{};window.__mem[k]=o;}}
+function concl(k){return !!load(k).concluido;}
+function trilhaLib(){return !!load('trilha').liberadoPelosPais;}
+
+function speakES(txt){try{if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(txt);u.lang='es-ES';u.rate=1;window.speechSynthesis.speak(u);}catch(e){}}
+
+/* TRAVA: só abre se mapa concluído, ou trilha liberada, ou este já concluído */
+if(!(concl('mapa')||trilhaLib()||concl('vocab'))){
+  document.getElementById('trava').style.display='flex';
+}
+
+var PALABRAS={
+  comida:[{es:'el pastel',pt:'o bolo'},{es:'los dulces',pt:'os doces'},{es:'los bocadillos',pt:'os salgadinhos / lanches'}],
+  cosas:[{es:'los globos',pt:'os balões / bexigas'},{es:'los regalos',pt:'os presentes'},{es:'la piñata',pt:'a pinhata'}],
+  disfraces:[{es:'la princesa',pt:'a princesa'},{es:'el príncipe',pt:'o príncipe'},{es:'el pirata',pt:'o pirata'},{es:'el hada',pt:'a fada'},{es:'la bruja',pt:'a bruxa'}],
+  tiendas:[{es:'el centro comercial',pt:'o shopping'},{es:'el supermercado',pt:'o supermercado'},{es:'el quiosco',pt:'a banca / quiosque'},{es:'la tienda',pt:'a loja'},{es:'la panadería',pt:'a padaria'},{es:'la heladería',pt:'a sorveteria'},{es:'la farmacia',pt:'a farmácia'},{es:'la plaza',pt:'a praça'}],
+  lugares:[{es:'la escuela',pt:'a escola'},{es:'el hospital',pt:'o hospital'},{es:'la iglesia',pt:'a igreja'},{es:'la calle',pt:'a rua'}],
+  palabras:[{es:'hay',pt:'há / tem'},{es:'cerca',pt:'perto'},{es:'lejos',pt:'longe'},{es:'¿Dónde?',pt:'Onde?'},{es:'¿Adónde?',pt:'Para onde?'},{es:'ir',pt:'ir'},{es:'pasear',pt:'passear'},{es:'trabajar',pt:'trabalhar'}]
+};
+
+function fichaHTML(lista){
+  var h='';
+  lista.forEach(function(p){
+    h+='<div class="palabra"><button class="bt-audio" data-say="'+p.es.replace(/"/g,'&quot;')+'">🔊</button>'+
+       '<span class="es">'+p.es+'</span><span class="pt">= '+p.pt+'</span></div>';
+  });
+  return h;
+}
+document.querySelectorAll('[data-palabras]').forEach(function(d){
+  d.innerHTML=fichaHTML(PALABRAS[d.getAttribute('data-palabras')]||[]);
+});
+
+var PERG=[
+  [ /* bloco 1 */
+    {q:'1) ¿Cómo se dice "o bolo" en español?',opts:['el pastel','los dulces','la piñata','los globos'],c:0,exp:'"El pastel" é o bolo da festa.'},
+    {q:'2) "Los globos" são, em português...',opts:['os presentes','os balões (bexigas)','os doces','os salgadinhos'],c:1,exp:'"Los globos" são os balões/bexigas.'},
+    {q:'3) Na festa, batemos na ______ para cair os doces.',opts:['tienda','piñata','escuela','farmacia'],c:1,exp:'A "piñata" é o enfeite de festa cheio de doces.'}
+  ],
+  [ /* bloco 2 */
+    {q:'1) Qual fantasia é "a bruxa"?',opts:['la princesa','la bruja','el hada','el pirata'],c:1,exp:'"La bruja" é a bruxa.'},
+    {q:'2) "El pirata" em português é...',opts:['o príncipe','o pirata','a fada','a princesa'],c:1,exp:'"El pirata" é o pirata.'},
+    {q:'3) A palavra "el hada" (a fada) é...',opts:['masculina','feminina','plural','inventada'],c:1,exp:'"El hada" é feminina (a fada), mas leva o artigo "el" no singular. É a pegadinha!'}
+  ],
+  [ /* bloco 3 */
+    {q:'1) Quero comprar pão. Vou à...',opts:['la heladería','la panadería','la farmacia','la escuela'],c:1,exp:'"La panadería" é a padaria (vende pão).'},
+    {q:'2) "La heladería" é o lugar de...',opts:['remédios','sorvetes','livros','roupas'],c:1,exp:'"La heladería" é a sorveteria (helado = sorvete).'},
+    {q:'3) As crianças estudam na...',opts:['la escuela','el hospital','la tienda','la plaza'],c:0,exp:'"La escuela" é a escola.'}
+  ],
+  [ /* bloco 4 */
+    {q:'1) "Cerca" significa...',opts:['longe','perto','grande','rápido'],c:1,exp:'"Cerca" = perto. O contrário é "lejos" = longe.'},
+    {q:'2) No diálogo, perto da casa da menina há uma plaza e também...',opts:['un hospital','un supermercado y una panadería','una escuela','una farmacia'],c:1,exp:'Ela diz: "muy cerca hay un supermercado y una panadería".'},
+    {q:'3) No diálogo, o hospital e a escola estão...',opts:['muy cerca','un poco lejos','en la fiesta','cerrados'],c:1,exp:'"El hospital y la escuela están un poco lejos" = um pouco longe.'}
+  ]
+];
+
+var estado=load('vocab');
+if(!estado.resp)estado.resp={}; // "bloco-indice": idxEscolhido
+
+function totalRespondidas(){return Object.keys(estado.resp).length;}
+
+function atualizaProgresso(){
+  var n=totalRespondidas();
+  document.getElementById('barra').style.width=Math.round(n/12*100)+'%';
+  document.getElementById('estrelas').textContent='⭐ '+n+' de 12 perguntas';
+  estado.respondidas=n;
+  if(n>=12 && !estado.concluido){estado.concluido=true;estado.concluidoEm=new Date().toISOString();}
+  save('vocab',estado);
+  if(n>=12){
+    document.getElementById('msgFim').textContent='🏆 ¡Muy bien! Você terminou o vocabulário!';
+    document.getElementById('btNext').style.display='inline-block';
+  }
+}
+
+function blocoCompleto(b){
+  for(var i=0;i<PERG[b].length;i++){if(estado.resp[b+'-'+i]===undefined)return false;}
+  return true;
+}
+function abreBloco(b){
+  var el=document.getElementById('bloco'+b);
+  if(el){el.classList.remove('bloqueado');var c=el.querySelector('.cadeado-bloco');if(c)c.style.display='none';}
+}
+
+function renderPreg(){
+  document.querySelectorAll('.preguntas').forEach(function(cont){
+    var b=parseInt(cont.getAttribute('data-bloco'),10);
+    var html='';
+    PERG[b].forEach(function(p,i){
+      html+='<div class="preg"><div class="q">'+p.q+'</div>';
+      p.opts.forEach(function(o,j){
+        html+='<button class="op" data-b="'+b+'" data-i="'+i+'" data-j="'+j+'">'+o+'</button>';
+      });
+      html+='<div class="fb" id="fb'+b+'-'+i+'"></div></div>';
+    });
+    cont.innerHTML=html;
+  });
+  document.querySelectorAll('.op').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var b=+btn.getAttribute('data-b'),i=+btn.getAttribute('data-i'),j=+btn.getAttribute('data-j');
+      if(estado.resp[b+'-'+i]!==undefined)return; // já respondida
+      estado.resp[b+'-'+i]=j;
+      marcaResposta(b,i,j,true);
+      save('vocab',estado);
+      if(blocoCompleto(b))abreBloco(b+1);
+      atualizaProgresso();
+    });
+  });
+}
+
+function marcaResposta(b,i,j,animar){
+  var correct=PERG[b][i].c;
+  var botoes=document.querySelectorAll('.op[data-b="'+b+'"][data-i="'+i+'"]');
+  botoes.forEach(function(bt){
+    var jj=+bt.getAttribute('data-j');
+    bt.disabled=true;
+    if(jj===correct)bt.classList.add('certo');
+    else if(jj===j)bt.classList.add('errado');
+  });
+  var fb=document.getElementById('fb'+b+'-'+i);
+  if(j===correct){fb.className='fb ok';fb.innerHTML='✅ ¡Correcto! '+PERG[b][i].exp;}
+  else{fb.className='fb no';fb.innerHTML='💡 Quase! A certa é <b>'+PERG[b][i].opts[correct]+'</b>. '+PERG[b][i].exp;}
+  fb.style.display='block';
+}
+
+/* áudio nos botões (depois de pintar fichas) */
+function ligaAudio(){
+  document.querySelectorAll('.bt-audio[data-say]').forEach(function(b){
+    b.addEventListener('click',function(){speakES(b.getAttribute('data-say'));});
+  });
+  var ad=document.getElementById('audioDialogo');
+  if(ad)ad.addEventListener('click',function(){
+    speakES('¡Hola, Maite! ¿Qué tal todo? Me encanta mi nueva ciudad. Es muy hermosa y tranquila. Aquí hay de todo. Cerca de mi casa hay una plaza muy linda y muy cerca hay un supermercado y una panadería. El hospital y la escuela están un poco lejos. ¡Genial! ¿Cuándo puedo visitarte?');
+  });
+}
+
+/* init */
+renderPreg();
+ligaAudio();
+// restaurar respostas e aberturas
+for(var b=0;b<PERG.length;b++){
+  for(var i=0;i<PERG[b].length;i++){
+    if(estado.resp[b+'-'+i]!==undefined)marcaResposta(b,i,estado.resp[b+'-'+i],false);
+  }
+  if(blocoCompleto(b))abreBloco(b+1);
+}
+atualizaProgresso();
+</script>
+</body>
+</html>
