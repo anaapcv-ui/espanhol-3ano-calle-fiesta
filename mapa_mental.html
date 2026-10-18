@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗺️ Mapa de la Calle Fiesta</title>
+<style>
+  :root{
+    --rosa:#ff6fae; --sol:#ffd23f; --cielo:#4aa3df; --menta:#43c6ac;
+    --tinta:#3a2b4d; --papel:#fff7fb;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Comic Sans MS','Trebuchet MS',system-ui,sans-serif;
+    background:linear-gradient(160deg,#fff7fb 0%,#fdf0f7 50%,#eefbf7 100%);
+    color:var(--tinta);padding:16px;font-size:18px;line-height:1.5;}
+  .wrap{max-width:860px;margin:0 auto;}
+  .hero{text-align:center;background:linear-gradient(135deg,var(--rosa),var(--sol));
+    border-radius:24px;padding:22px 18px;color:#fff;box-shadow:0 8px 0 #e0559a;margin-bottom:18px;}
+  .hero h1{margin:.1em 0;font-size:2em;text-shadow:2px 2px 0 rgba(0,0,0,.15);}
+  .hero p{margin:.2em 0;font-size:1.05em;}
+  .paco{font-size:3em;display:block;}
+  .central{text-align:center;background:var(--cielo);color:#fff;border-radius:20px;
+    padding:16px;font-size:1.5em;font-weight:bold;margin:0 auto 20px;max-width:420px;
+    box-shadow:0 6px 0 #2f7fb8;}
+  .contador{text-align:center;font-size:1.3em;font-weight:bold;margin:12px 0;color:var(--tinta);}
+  .ramo{border-radius:20px;padding:4px;margin:16px 0;box-shadow:0 5px 0 rgba(0,0,0,.12);}
+  .ramo.festa{background:#ffe3f0;border:4px solid var(--rosa);}
+  .ramo.cidade{background:#e3f4ff;border:4px solid var(--cielo);}
+  .ramo h2{text-align:center;margin:10px;font-size:1.4em;}
+  .sub{background:#fff;border-radius:16px;margin:10px;padding:0;overflow:hidden;
+    border:3px solid #eee;}
+  .sub .cab{cursor:pointer;padding:14px 16px;font-size:1.15em;font-weight:bold;
+    display:flex;justify-content:space-between;align-items:center;user-select:none;}
+  .sub.festa .cab{background:#ffd9ec;}
+  .sub.cidade .cab{background:#d6edff;}
+  .sub .cab .seta{transition:transform .2s;}
+  .sub.aberto .cab .seta{transform:rotate(90deg);}
+  .sub .corpo{display:none;padding:10px 14px 16px;}
+  .sub.aberto .corpo{display:block;animation:ap .3s;}
+  @keyframes ap{from{opacity:0;transform:translateY(-6px);}to{opacity:1;}}
+  .visto{outline:3px solid var(--menta);}
+  .palabra{display:flex;align-items:center;gap:10px;background:#fafafa;border-radius:12px;
+    padding:8px 10px;margin:7px 0;flex-wrap:wrap;}
+  .palabra .es{font-weight:bold;color:#c23a7e;font-size:1.1em;}
+  .palabra .pt{color:#555;}
+  .bt-audio{background:var(--sol);border:none;border-radius:50%;width:42px;height:42px;
+    font-size:1.2em;cursor:pointer;box-shadow:0 3px 0 #d9ad1f;flex:0 0 auto;}
+  .bt-audio:active{transform:translateY(2px);box-shadow:0 1px 0 #d9ad1f;}
+  .fim{text-align:center;margin:26px 0 10px;}
+  .bt-grande{background:var(--menta);color:#fff;border:none;border-radius:18px;
+    padding:16px 26px;font-size:1.3em;font-weight:bold;cursor:pointer;
+    box-shadow:0 6px 0 #2f9c86;font-family:inherit;}
+  .bt-grande:disabled{background:#cfd8d5;box-shadow:0 6px 0 #b4bdb9;cursor:not-allowed;color:#fff;}
+  .bt-grande:not(:disabled):active{transform:translateY(3px);box-shadow:0 3px 0 #2f9c86;}
+  .dica{text-align:center;color:#8a7;font-size:.95em;margin-top:8px;}
+  .salvo{text-align:center;color:#8aa;font-size:.85em;margin-top:18px;}
+  a.volta{display:inline-block;margin-top:10px;color:var(--cielo);font-weight:bold;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <span class="paco">🐶🎈</span>
+    <h1>🗺️ Mapa de la Calle Fiesta</h1>
+    <p>Olá! Eu sou o <b>Paco</b>. Vamos passear pela cidade e chegar à festa!</p>
+    <p>Clique em cada balãozinho para abrir e ouvir as palavras em espanhol 🔊</p>
+  </div>
+
+  <div class="central">🎈 ¡La Calle Fiesta! 🎉</div>
+
+  <div class="contador" id="contador">🧭 Paradas abertas: 0 de 6</div>
+
+  <div class="ramo festa">
+    <h2>🎉 Capítulo 6 — Una fiesta de cumpleaños</h2>
+
+    <div class="sub festa" data-id="comida">
+      <div class="cab">🍰 La comida de la fiesta <span class="seta">▶</span></div>
+      <div class="corpo" data-palabras="comida"></div>
+    </div>
+    <div class="sub festa" data-id="cosas">
+      <div class="cab">🎈 Las cosas de la fiesta <span class="seta">▶</span></div>
+      <div class="corpo" data-palabras="cosas"></div>
+    </div>
+    <div class="sub festa" data-id="disfraces">
+      <div class="cab">👑 Los disfraces (personagens) <span class="seta">▶</span></div>
+      <div class="corpo" data-palabras="disfraces"></div>
+    </div>
+  </div>
+
+  <div class="ramo cidade">
+    <h2>🏙️ Capítulo 7 — Un recorrido por la ciudad</h2>
+
+    <div class="sub cidade" data-id="tiendas">
+      <div class="cab">🏬 Los establecimientos comerciales <span class="seta">▶</span></div>
+      <div class="corpo" data-palabras="tiendas"></div>
+    </div>
+    <div class="sub cidade" data-id="lugares">
+      <div class="cab">⛪ Otros lugares de la ciudad <span class="seta">▶</span></div>
+      <div class="corpo" data-palabras="lugares"></div>
+    </div>
+    <div class="sub cidade" data-id="palabras">
+      <div class="cab">🧭 Palabras para moverse en la ciudad <span class="seta">▶</span></div>
+      <div class="corpo" data-palabras="palabras"></div>
+    </div>
+  </div>
+
+  <div class="fim">
+    <button class="bt-grande" id="btFim" disabled>✅ ¡Ya exploré el mapa!</button>
+    <p class="dica" id="dicaFim">Abra as 6 paradas para liberar o botão 🌟</p>
+    <div id="linkNext" style="display:none;">
+      <a class="bt-grande" href="vocabulario.html" style="text-decoration:none;display:inline-block;margin-top:14px;">📖 Ir para El Paseo (vocabulário) →</a>
+    </div>
+  </div>
+
+  <p class="salvo" id="salvo">💾 Seu progresso é salvo neste aparelho.</p>
+  <div style="text-align:center;"><a class="volta" href="index.html">🏠 Voltar ao início</a></div>
+</div>
+
+<script>
+var KIT='cf3';
+function load(k){try{var v=localStorage.getItem(KIT+'_'+k);return v?JSON.parse(v):{};}catch(e){return (window.__mem&&window.__mem[k])||{};}}
+function save(k,o){try{localStorage.setItem(KIT+'_'+k,JSON.stringify(o));}catch(e){window.__mem=window.__mem||{};window.__mem[k]=o;}}
+
+function speakES(txt){
+  try{
+    if(!('speechSynthesis' in window))return;
+    window.speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(txt);
+    u.lang='es-ES'; u.rate=1;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+var PALABRAS={
+  comida:[
+    {es:'el pastel',pt:'o bolo'},
+    {es:'los dulces',pt:'os doces'},
+    {es:'los bocadillos',pt:'os salgadinhos / lanches'}
+  ],
+  cosas:[
+    {es:'los globos',pt:'os balões / bexigas'},
+    {es:'los regalos',pt:'os presentes'},
+    {es:'la piñata',pt:'a pinhata'}
+  ],
+  disfraces:[
+    {es:'la princesa',pt:'a princesa'},
+    {es:'el príncipe',pt:'o príncipe'},
+    {es:'el pirata',pt:'o pirata'},
+    {es:'el hada',pt:'a fada'},
+    {es:'la bruja',pt:'a bruxa'}
+  ],
+  tiendas:[
+    {es:'el centro comercial',pt:'o shopping'},
+    {es:'el supermercado',pt:'o supermercado'},
+    {es:'el quiosco',pt:'a banca / quiosque'},
+    {es:'la tienda',pt:'a loja'},
+    {es:'la panadería',pt:'a padaria'},
+    {es:'la heladería',pt:'a sorveteria'},
+    {es:'la farmacia',pt:'a farmácia'},
+    {es:'la plaza',pt:'a praça'}
+  ],
+  lugares:[
+    {es:'la escuela',pt:'a escola'},
+    {es:'el hospital',pt:'o hospital'},
+    {es:'la iglesia',pt:'a igreja'},
+    {es:'la calle',pt:'a rua'}
+  ],
+  palabras:[
+    {es:'hay',pt:'há / tem'},
+    {es:'cerca',pt:'perto'},
+    {es:'lejos',pt:'longe'},
+    {es:'¿Dónde?',pt:'Onde?'},
+    {es:'¿Adónde?',pt:'Para onde?'},
+    {es:'ir',pt:'ir'},
+    {es:'pasear',pt:'passear'},
+    {es:'trabajar',pt:'trabalhar'}
+  ]
+};
+
+function pintaPalabras(){
+  var corpos=document.querySelectorAll('.corpo');
+  corpos.forEach(function(c){
+    var lista=PALABRAS[c.getAttribute('data-palabras')]||[];
+    var html='';
+    lista.forEach(function(p){
+      html+='<div class="palabra"><button class="bt-audio" data-say="'+p.es.replace(/"/g,'&quot;')+'">🔊</button>'+
+            '<span class="es">'+p.es+'</span><span class="pt">= '+p.pt+'</span></div>';
+    });
+    c.innerHTML=html;
+  });
+  document.querySelectorAll('.bt-audio').forEach(function(b){
+    b.addEventListener('click',function(ev){ev.stopPropagation();speakES(b.getAttribute('data-say'));});
+  });
+}
+
+var vistos={};
+function atualizaContador(){
+  var n=Object.keys(vistos).length;
+  document.getElementById('contador').textContent='🧭 Paradas abertas: '+n+' de 6';
+  var dat=load('mapa'); dat.ramosVistos=n; save('mapa',dat);
+  if(n>=6){
+    var bt=document.getElementById('btFim'); bt.disabled=false;
+    document.getElementById('dicaFim').textContent='Você abriu todas! Clique no botão 🌟';
+  }
+}
+
+document.querySelectorAll('.sub').forEach(function(sub){
+  sub.querySelector('.cab').addEventListener('click',function(){
+    sub.classList.toggle('aberto');
+    if(sub.classList.contains('aberto')){
+      sub.classList.add('visto');
+      vistos[sub.getAttribute('data-id')]=true;
+      atualizaContador();
+    }
+  });
+});
+
+document.getElementById('btFim').addEventListener('click',function(){
+  var dat=load('mapa');
+  if(!dat.concluido){dat.concluido=true;dat.concluidoEm=new Date().toISOString();}
+  dat.ramosVistos=6; save('mapa',dat);
+  this.textContent='⭐ ¡Muy bien! Mapa explorado ⭐';
+  this.disabled=true;
+  document.getElementById('linkNext').style.display='block';
+  document.getElementById('dicaFim').style.display='none';
+});
+
+// restaurar
+(function init(){
+  pintaPalabras();
+  var dat=load('mapa');
+  if(dat.concluido){
+    document.getElementById('btFim').textContent='⭐ ¡Mapa ya explorado! ⭐';
+    document.getElementById('btFim').disabled=true;
+    document.getElementById('linkNext').style.display='block';
+    document.getElementById('dicaFim').style.display='none';
+    document.getElementById('contador').textContent='🧭 Paradas abertas: 6 de 6';
+  }
+})();
+</script>
+</body>
+</html>
